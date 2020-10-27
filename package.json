@@ -1,0 +1,23 @@
+{
+  "name": "Sokoban-IA",
+  "version": "1.0.0",
+  "description": "Smart agent who plays Sokoban",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micardona96/Sokoban-IA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/micardona96/Sokoban-IA/issues"
+  },
+  "homepage": "https://github.com/micardona96/Sokoban-IA#readme",
+  "dependencies": {
+    "tsc": "^1.20150623.0"
+  }
+}
