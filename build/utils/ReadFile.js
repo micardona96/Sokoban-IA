@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = require("fs");
 function readMapFromFile(path) {
     var map = [];
-    var positionBoxes = [];
-    var positionPlayer = [];
+    var initialPositionBoxes = [];
+    var initialPositionPlayer = [];
+    var endPositionBoxes = [];
     var content = fs_1.readFileSync(path, 'utf8');
     var lines = content.split(/\r?\n/);
     var counter = 0;
@@ -14,17 +15,26 @@ function readMapFromFile(path) {
         }
         else if (typeof parseInt(line[0]) === 'number') {
             if (counter === 0) {
-                positionPlayer = line.split(',').map(function (value) { return parseInt(value); });
+                initialPositionPlayer = line.split(',').map(function (value) { return parseInt(value); });
                 counter++;
             }
             else if (line !== '') {
-                positionBoxes.push(line.split(',').map(function (value) { return parseInt(value); }));
+                initialPositionBoxes.push(line.split(',').map(function (value) { return parseInt(value); }));
             }
         }
     });
+    map.forEach(function (row, indexRow) {
+        row.forEach(function (col, indexCol) {
+            if (map[indexRow][indexCol] === 'X') {
+                endPositionBoxes.push([indexRow, indexCol]);
+            }
+        });
+    });
     return {
         map: map,
-        positionPlayer: positionPlayer,
-        positionBoxes: positionBoxes,
+        initialPositionPlayer: initialPositionPlayer,
+        initialPositionBoxes: initialPositionBoxes,
+        endPositionBoxes: endPositionBoxes,
     };
 }
+console.log(readMapFromFile('./../../test/nivel1.txt'));
