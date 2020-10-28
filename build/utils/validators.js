@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isThereBox = exports.isNotWall = exports.isNotEdge = void 0;
 function isNotEdge(position, direction, map) {
     if (direction == 'U' && position[0] - 1 > 0)
         return true;
@@ -12,6 +13,7 @@ function isNotEdge(position, direction, map) {
     else
         return false;
 }
+exports.isNotEdge = isNotEdge;
 function isNotWall(position, direction, map) {
     if (direction == 'U' && map[position[0] - 1][position[1]] !== 'W')
         return true;
@@ -24,10 +26,12 @@ function isNotWall(position, direction, map) {
     else
         return false;
 }
+exports.isNotWall = isNotWall;
 function isThereBox(boxPositions, movePosition) {
     boxPositions.forEach(function (position) {
         if (position[0] == movePosition[0] && position[1] == movePosition[1])
-            return true;
+            return position[0];
     });
-    return false;
+    return -1;
 }
+exports.isThereBox = isThereBox;

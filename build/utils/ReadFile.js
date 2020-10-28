@@ -37,4 +37,4 @@ function readMapFromFile(path) {
         endPositionBoxes: endPositionBoxes,
     };
 }
-console.log(readMapFromFile('./../../test/nivel1.txt'));
+exports.default = readMapFromFile;

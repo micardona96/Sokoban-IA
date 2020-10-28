@@ -42,4 +42,4 @@ function readMapFromFile(path: string): StateWorld{
   }
 }
 
-console.log(readMapFromFile('./../../test/nivel1.txt'));
+export default readMapFromFile;
