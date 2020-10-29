@@ -1,9 +1,11 @@
 {
-  "name": "Sokoban-IA",
+  "name": "sokoban-project",
   "version": "1.0.0",
   "description": "Smart agent who plays Sokoban",
   "main": "index.js",
   "scripts": {
+    "install": "npm install",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

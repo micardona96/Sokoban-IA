@@ -49,16 +49,16 @@ function expandNode(_a, queue, map, mode) {
     insertNodeToQueue(queue, nodesToInsert, mode);
 }
 exports.expandNode = expandNode;
-function insertNodeToQueue(queue, node, mode) {
+function insertNodeToQueue(queue, nodes, mode) {
     switch (mode) {
         case constants_1.Algorithm.BFS:
-            queue.enqueueFront(node);
+            queue.enqueueFront(nodes);
             break;
         case constants_1.Algorithm.DFS:
-            queue.enqueueBack(node);
+            queue.enqueueBack(nodes);
             break;
         default:
-            queue.enqueueFront(node);
+            queue.enqueueFront(nodes);
             break;
     }
 }

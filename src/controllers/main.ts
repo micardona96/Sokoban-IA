@@ -4,11 +4,11 @@ import { expandNode, isSolved } from './../controllers/controller';
 import GenericQueue from '../models/GenericQueue';
 import { Algorithm } from '../utils/constants';
 
-const world: StateWorld = readMapFromFile('./../../test/nivel4.txt');
+const world: StateWorld = readMapFromFile('./../../test/nivel1.txt');
 
 
 let queue: GenericQueue = new GenericQueue();
-let mode: Algorithm = Algorithm.DFS;
+let mode: Algorithm = Algorithm.BFS;
 
 let initialNode: Node = {
   deep: 0,
@@ -18,14 +18,13 @@ let initialNode: Node = {
 }
 
 
-//queue.enqueueFront(initialNode);
 queue.enqueueBack([initialNode]);
 
 let node: Node = queue.dequeue();
 
 
-//runBreathDeep();
-runDeepIteration();
+runBreathDeep();
+//runDeepIteration();
 
 
 if(node !== null){
@@ -37,10 +36,10 @@ if(node !== null){
 function runBreathDeep(){
   while(!isSolved(node, world.endPositionBoxes)){
     if(node.deep <= 64){
-  
       expandNode(node, queue, world.map, mode);
+      console.log(queue.items.length)
     }
-  
+
     if(!queue.isEmpty()){
       queue.printQueue();
       node = queue.dequeue();
@@ -69,8 +68,7 @@ function runDeepIteration(){
     }else if(queue.isEmpty() && level < 64){
       queue.enqueueBack([initialNode]);
       level++;
-    }
-    else{
+    }else{
       console.log("No se encontró solución");
       console.log("Último nodo");
       console.log(node);

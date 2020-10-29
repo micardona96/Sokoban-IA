@@ -5,7 +5,7 @@ var GenericQueue = /** @class */ (function () {
         this.items = [];
     }
     GenericQueue.prototype.enqueueFront = function (elements) {
-        this.items.concat(elements);
+        this.items = this.items.concat(elements);
     };
     GenericQueue.prototype.enqueueBack = function (elements) {
         this.items = elements.concat(this.items);
@@ -15,21 +15,24 @@ var GenericQueue = /** @class */ (function () {
         return shiftNode;
     };
     GenericQueue.prototype.isEmpty = function () {
-        return this.items.length == 0;
+        return this.items.length === 0;
+    };
+    GenericQueue.printNode = function (node) {
+        console.log("Position player: [ " + node.positionPlayer[0] + ", " + node.positionPlayer[1] + " ]");
+        console.log("Position boxes:");
+        for (var _i = 0, _a = node.positionBoxes; _i < _a.length; _i++) {
+            var box = _a[_i];
+            console.log("[ " + box[0] + ", " + box[1] + " ]");
+        }
+        console.log("Deep: " + node.deep);
+        console.log("Path: " + node.path);
+        console.log('\n');
     };
     GenericQueue.prototype.printQueue = function () {
         console.log('Generic Queue');
         for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
             var node = _a[_i];
-            console.log("Position player: [ " + node.positionPlayer[0] + ", " + node.positionPlayer[1] + " ]");
-            console.log("Position boxes:");
-            for (var _b = 0, _c = node.positionBoxes; _b < _c.length; _b++) {
-                var box = _c[_b];
-                console.log("[ " + box[0] + ", " + box[1] + " ]");
-            }
-            console.log("Deep: " + node.deep);
-            console.log("Path: " + node.path);
-            console.log('\n');
+            GenericQueue.printNode(node);
         }
     };
     return GenericQueue;

@@ -56,16 +56,16 @@ export function expandNode({ positionPlayer, deep, path, positionBoxes }: Node, 
 }
 
 
-function insertNodeToQueue(queue: GenericQueue, node: Node[], mode: Algorithm){
+function insertNodeToQueue(queue: GenericQueue, nodes: Node[], mode: Algorithm){
   switch(mode){
     case Algorithm.BFS:
-      queue.enqueueFront(node);
+      queue.enqueueFront(nodes);
       break;
     case Algorithm.DFS:
-      queue.enqueueBack(node);
+      queue.enqueueBack(nodes);
       break;
     default:
-      queue.enqueueFront(node);
+      queue.enqueueFront(nodes);
       break;
   }
 }
