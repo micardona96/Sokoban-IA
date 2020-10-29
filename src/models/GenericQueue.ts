@@ -7,12 +7,12 @@ class GenericQueue {
     this.items = [];
   }
 
-  enqueueFront(element: Node) : void {
-    this.items.push(element);
+  enqueueFront(elements: Node[]) : void {
+    this.items.concat(elements);
   }
 
-  enqueueBack(element: Node) : void {
-    this.items.splice(0,0, element);
+  enqueueBack(elements: Node[]) : void {
+    this.items = elements.concat(this.items);
   }
 
 

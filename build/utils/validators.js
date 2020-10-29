@@ -28,10 +28,12 @@ function isNotWall(position, direction, map) {
 }
 exports.isNotWall = isNotWall;
 function isThereBox(boxPositions, movePosition) {
-    boxPositions.forEach(function (position) {
-        if (position[0] == movePosition[0] && position[1] == movePosition[1])
-            return position[0];
-    });
+    var index = null;
+    for (var i = 0; i < boxPositions.length; i++) {
+        if (boxPositions[i][0] === movePosition[0] && boxPositions[i][1] === movePosition[1]) {
+            return i;
+        }
+    }
     return -1;
 }
 exports.isThereBox = isThereBox;

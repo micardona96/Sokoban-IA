@@ -4,11 +4,11 @@ var GenericQueue = /** @class */ (function () {
     function GenericQueue() {
         this.items = [];
     }
-    GenericQueue.prototype.enqueueFront = function (element) {
-        this.items.push(element);
+    GenericQueue.prototype.enqueueFront = function (elements) {
+        this.items.concat(elements);
     };
-    GenericQueue.prototype.enqueueBack = function (element) {
-        this.items.splice(0, 0, element);
+    GenericQueue.prototype.enqueueBack = function (elements) {
+        this.items = elements.concat(this.items);
     };
     GenericQueue.prototype.dequeue = function () {
         var shiftNode = this.items.shift();
