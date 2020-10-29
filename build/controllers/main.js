@@ -16,28 +16,52 @@ var initialNode = {
 //queue.enqueueFront(initialNode);
 queue.enqueueBack([initialNode]);
 var node = queue.dequeue();
-var contador = 0;
-while (!controller_1.isSolved(node, world.endPositionBoxes)) {
-    if (node.deep <= 64) {
-        contador++;
-        controller_1.expandNode(node, queue, world.map, mode);
-    }
-    console.log(contador);
-    if (!queue.isEmpty()) {
-        queue.printQueue();
-        node = queue.dequeue();
-    }
-    else {
-        console.log("No se encontró solución");
-        console.log("Último nodo");
-        console.log(node);
-        node = null;
-        break;
-    }
-}
+//runBreathDeep();
+runDeepIteration();
 if (node !== null) {
     console.log("La solución es: ");
     console.log(node);
+}
+function runBreathDeep() {
+    while (!controller_1.isSolved(node, world.endPositionBoxes)) {
+        if (node.deep <= 64) {
+            controller_1.expandNode(node, queue, world.map, mode);
+        }
+        if (!queue.isEmpty()) {
+            queue.printQueue();
+            node = queue.dequeue();
+        }
+        else {
+            console.log("No se encontró solución");
+            console.log("Último nodo");
+            console.log(node);
+            node = null;
+            break;
+        }
+    }
+}
+function runDeepIteration() {
+    var level = 0;
+    while (!controller_1.isSolved(node, world.endPositionBoxes)) {
+        if (node.deep <= level) {
+            controller_1.expandNode(node, queue, world.map, mode);
+        }
+        if (!queue.isEmpty()) {
+            queue.printQueue();
+            node = queue.dequeue();
+        }
+        else if (queue.isEmpty() && level < 64) {
+            queue.enqueueBack([initialNode]);
+            level++;
+        }
+        else {
+            console.log("No se encontró solución");
+            console.log("Último nodo");
+            console.log(node);
+            node = null;
+            break;
+        }
+    }
 }
 /*
 expandNode(initialNode, queue, world.map, Algorithm.BFS)

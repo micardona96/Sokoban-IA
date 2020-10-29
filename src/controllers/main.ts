@@ -23,34 +23,62 @@ queue.enqueueBack([initialNode]);
 
 let node: Node = queue.dequeue();
 
-let contador = 0;
 
-while(!isSolved(node, world.endPositionBoxes)){
-  if(node.deep <= 64){
-    contador++;
-    expandNode(node, queue, world.map, mode);
-  }
+//runBreathDeep();
+runDeepIteration();
 
-  console.log(contador)
-
-  if(!queue.isEmpty()){
-    queue.printQueue();
-    node = queue.dequeue();
-  }else{
-    console.log("No se encontró solución");
-    console.log("Último nodo");
-    console.log(node);
-    node = null;
-    break;
-  }
-
-}
 
 if(node !== null){
   console.log("La solución es: ");
   console.log(node)
 }
 
+
+function runBreathDeep(){
+  while(!isSolved(node, world.endPositionBoxes)){
+    if(node.deep <= 64){
+  
+      expandNode(node, queue, world.map, mode);
+    }
+  
+    if(!queue.isEmpty()){
+      queue.printQueue();
+      node = queue.dequeue();
+    }else{
+      console.log("No se encontró solución");
+      console.log("Último nodo");
+      console.log(node);
+      node = null;
+      break;
+    }
+  }
+}
+
+function runDeepIteration(){
+
+  let level = 0;
+
+  while(!isSolved(node, world.endPositionBoxes)){
+    if(node.deep <= level){
+      expandNode(node, queue, world.map, mode);
+    }
+  
+    if(!queue.isEmpty()){
+      queue.printQueue();
+      node = queue.dequeue();
+    }else if(queue.isEmpty() && level < 64){
+      queue.enqueueBack([initialNode]);
+      level++;
+    }
+    else{
+      console.log("No se encontró solución");
+      console.log("Último nodo");
+      console.log(node);
+      node = null;
+      break;
+    }
+  }
+}
 
 
 
