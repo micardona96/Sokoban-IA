@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# chmod u+x ./run.sh
 
 if [ "$1" == "BFS" ];
 then
