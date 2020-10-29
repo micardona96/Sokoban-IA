@@ -5,7 +5,8 @@ import GenericQueue from '../models/GenericQueue';
 import { Algorithm } from '../utils/constants';
 
 //ESTADO INICIAL DEL MUNDO
-const world: StateWorld = readMapFromFile('./../../test/nivel_prueba.txt');
+//'./../../test/nivel_prueba.txt'
+const world: StateWorld = readMapFromFile(process.argv[2]);
 
 let initialNode: Node = {
   deep: 0,

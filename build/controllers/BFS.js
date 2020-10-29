@@ -5,7 +5,8 @@ var controller_1 = require("./../controllers/controller");
 var GenericQueue_1 = require("../models/GenericQueue");
 var constants_1 = require("../utils/constants");
 //ESTADO INICIAL DEL MUNDO
-var world = ReadFile_1.default('./../../test/nivel_prueba.txt');
+//'./../../test/nivel_prueba.txt'
+var world = ReadFile_1.default(process.argv[2]);
 var initialNode = {
     deep: 0,
     path: '',
