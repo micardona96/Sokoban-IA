@@ -4,7 +4,7 @@ exports.isSolved = exports.expandNode = void 0;
 var validators_1 = require("./../utils/validators");
 var constants_1 = require("../utils/constants");
 var constants_2 = require("./../utils/constants");
-function expandNode(_a, queue, map, mode) {
+function expandNode(_a, queue, map, mode, expandedNodes) {
     var positionPlayer = _a.positionPlayer, deep = _a.deep, path = _a.path, positionBoxes = _a.positionBoxes;
     var nodesToInsert = [];
     constants_2.MOVEMENTS.forEach(function (_a) {
@@ -37,13 +37,15 @@ function expandNode(_a, queue, map, mode) {
                     }
                 }
             }
-            var newNode = {
-                positionPlayer: newPositionPlayer,
-                deep: deep + 1,
-                path: path.concat(" " + direction),
-                positionBoxes: newPositionBoxes
-            };
-            nodesToInsert.push(newNode);
+            if (!isNodeExplored(newPositionPlayer, newPositionBoxes, expandedNodes)) {
+                var newNode = {
+                    positionPlayer: newPositionPlayer,
+                    deep: deep + 1,
+                    path: path.concat(" " + direction),
+                    positionBoxes: newPositionBoxes
+                };
+                nodesToInsert.push(newNode);
+            }
         }
     });
     insertNodeToQueue(queue, nodesToInsert, mode);
@@ -79,3 +81,23 @@ function isSolved(node, finalPositionBoxes) {
         return false;
 }
 exports.isSolved = isSolved;
+function isNodeExplored(positionPlayer, positionBoxes, exploredNodes) {
+    var numberEqualBoxes = 0;
+    for (var _i = 0, exploredNodes_1 = exploredNodes; _i < exploredNodes_1.length; _i++) {
+        var node = exploredNodes_1[_i];
+        if (node.positionPlayer[0] === positionPlayer[0] && node.positionPlayer[1] === positionPlayer[1]) {
+            for (var i = 0; i < positionBoxes.length; i++) {
+                if (positionBoxes[i][0] === node.positionBoxes[i][0] && positionBoxes[i][1] === node.positionBoxes[i][1]) {
+                    numberEqualBoxes++;
+                }
+            }
+        }
+        if (numberEqualBoxes === positionBoxes.length) {
+            return true;
+        }
+        else {
+            numberEqualBoxes = 0;
+        }
+    }
+    return false;
+}

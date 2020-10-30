@@ -15,23 +15,18 @@ var initialNode = {
 BFSAlgorithm(initialNode, world);
 function BFSAlgorithm(initialNode, world) {
     var queue = new GenericQueue_1.default();
+    var expandedNodes = [];
     var mode = constants_1.Algorithm.DFS;
-    var level = 0;
     queue.enqueueBack([initialNode]);
     var currentNode = queue.dequeue();
     while (!controller_1.isSolved(currentNode, world.endPositionBoxes)) {
         if (currentNode.deep < 64) {
-            controller_1.expandNode(currentNode, queue, world.map, mode);
+            controller_1.expandNode(currentNode, queue, world.map, mode, expandedNodes);
+            expandedNodes.push(currentNode);
         }
         if (!queue.isEmpty()) {
             currentNode = queue.dequeue();
-            /*
-            if(currentNode.deep > level){
-              level = currentNode.deep;
-              console.log(level);
-            }
-            */
-            //GenericQueue.printNode(currentNode);
+            GenericQueue_1.default.printNode(currentNode);
         }
         else {
             console.log("No se encontró solución");

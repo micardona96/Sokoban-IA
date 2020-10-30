@@ -4,7 +4,7 @@ import { isNotEdge, isNotWall, isThereBox } from './../utils/validators';
 import { Algorithm } from '../utils/constants';
 import { MOVEMENTS } from './../utils/constants';
 
-export function expandNode({ positionPlayer, deep, path, positionBoxes }: Node, queue: GenericQueue, map: string[][], mode: Algorithm) : void{
+export function expandNode({ positionPlayer, deep, path, positionBoxes }: Node, queue: GenericQueue, map: string[][], mode: Algorithm, expandedNodes: Node[]) : void{
 
   let nodesToInsert: Node[] = []
 
@@ -36,18 +36,17 @@ export function expandNode({ positionPlayer, deep, path, positionBoxes }: Node, 
             newPositionPlayer[1] = positionPlayer[1] + addValue;
           }
         }
-        
       }
 
-      let newNode: Node = {
-        positionPlayer: newPositionPlayer,
-        deep: deep + 1,
-        path: path.concat(` ${direction}`),
-        positionBoxes: newPositionBoxes
+      if(!isNodeExplored(newPositionPlayer, newPositionBoxes, expandedNodes)){
+        let newNode: Node = {
+          positionPlayer: newPositionPlayer,
+          deep: deep + 1,
+          path: path.concat(` ${direction}`),
+          positionBoxes: newPositionBoxes
+        }
+        nodesToInsert.push(newNode);
       }
-
-      nodesToInsert.push(newNode);
-
     }
   })
 
@@ -86,5 +85,26 @@ export function isSolved(node: Node, finalPositionBoxes: number[][]){
     return true;
   else
     return false;
+}
+
+function isNodeExplored(positionPlayer: number[], positionBoxes: number[][], exploredNodes: Node[]) : boolean {
+  let numberEqualBoxes = 0;
+  for(let node of exploredNodes){
+    if(node.positionPlayer[0] === positionPlayer[0] && node.positionPlayer[1] === positionPlayer[1]){
+        for(let i = 0; i<positionBoxes.length; i++){
+          if(positionBoxes[i][0] === node.positionBoxes[i][0] &&  positionBoxes[i][1] === node.positionBoxes[i][1]){
+            numberEqualBoxes++;
+          }
+        }
+    }
+
+    if(numberEqualBoxes === positionBoxes.length){
+      return true;
+    }else{
+      numberEqualBoxes = 0;
+    }
+  }
+
+  return false;
 
 }

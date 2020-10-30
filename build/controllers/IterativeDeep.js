@@ -15,26 +15,22 @@ runDeepIteration();
 function runDeepIteration() {
     var queue = new GenericQueue_1.default();
     var mode = constants_1.Algorithm.DFS;
+    var expandedNodes = [];
     var level = 0;
-    var levelCount = 0;
     queue.enqueueBack([initialNode]);
     var currentNode = queue.dequeue();
     while (!controller_1.isSolved(currentNode, world.endPositionBoxes)) {
         if (currentNode.deep <= level) {
-            controller_1.expandNode(currentNode, queue, world.map, mode);
+            controller_1.expandNode(currentNode, queue, world.map, mode, expandedNodes);
+            expandedNodes.push(currentNode);
         }
         if (!queue.isEmpty()) {
             currentNode = queue.dequeue();
-            /*
-            if(currentNode.deep > level){
-              levelCount = currentNode.deep;
-              console.log(levelCount);
-            }
-            */
-            //GenericQueue.printNode(currentNode);
+            GenericQueue_1.default.printNode(currentNode);
         }
         else if (queue.isEmpty() && level < 64) {
             queue.enqueueBack([initialNode]);
+            expandedNodes = [];
             level++;
         }
         else {
@@ -42,6 +38,7 @@ function runDeepIteration() {
             console.log("Último nodo");
             console.log(currentNode);
             currentNode = null;
+            console.log(level);
             break;
         }
     }
