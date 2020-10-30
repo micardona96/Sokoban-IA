@@ -20,35 +20,31 @@ function runDeepIteration(){
 
   let queue: GenericQueue = new GenericQueue();
   let mode: Algorithm = Algorithm.DFS;
+  let expandedNodes: Node[] = [];
   let level = 0;
-  let levelCount = 0;
 
   queue.enqueueBack([initialNode]);
   let currentNode: Node = queue.dequeue();
 
- 
   while(!isSolved(currentNode, world.endPositionBoxes)){
     if(currentNode.deep <= level){
-      expandNode(currentNode, queue, world.map, mode);
+      expandNode(currentNode, queue, world.map, mode, expandedNodes);
+      expandedNodes.push(currentNode);
     }
 
     if(!queue.isEmpty()){
       currentNode = queue.dequeue();
-      /*
-      if(currentNode.deep > level){
-        levelCount = currentNode.deep;
-        console.log(levelCount);
-      }
-      */
-      //GenericQueue.printNode(currentNode);
+      GenericQueue.printNode(currentNode);
     }else if(queue.isEmpty() && level < 64){
       queue.enqueueBack([initialNode]);
+      expandedNodes = [];
       level++;
     }else{
       console.log("No se encontró solución");
       console.log("Último nodo");
       console.log(currentNode);
       currentNode = null;
+      console.log(level)
       break;
     }
   }

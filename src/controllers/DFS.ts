@@ -20,8 +20,8 @@ BFSAlgorithm(initialNode, world);
 function BFSAlgorithm(initialNode: Node, world: StateWorld){
 
   let queue: GenericQueue = new GenericQueue();
+  let expandedNodes: Node[] = [];
   let mode: Algorithm = Algorithm.DFS;
-  let level: number = 0;
   
   queue.enqueueBack([initialNode]);
 
@@ -29,18 +29,13 @@ function BFSAlgorithm(initialNode: Node, world: StateWorld){
 
   while(!isSolved(currentNode, world.endPositionBoxes)){
     if(currentNode.deep < 64){
-      expandNode(currentNode, queue, world.map, mode);
+      expandNode(currentNode, queue, world.map, mode, expandedNodes);
+      expandedNodes.push(currentNode);
     }
   
     if(!queue.isEmpty()){
       currentNode = queue.dequeue();
-      /*
-      if(currentNode.deep > level){
-        level = currentNode.deep;
-        console.log(level);
-      }
-      */
-      //GenericQueue.printNode(currentNode);
+      GenericQueue.printNode(currentNode);
     }else{
       console.log("No se encontró solución");
       console.log("Último nodo");
