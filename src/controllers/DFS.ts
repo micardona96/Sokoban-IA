@@ -35,7 +35,7 @@ function BFSAlgorithm(initialNode: Node, world: StateWorld){
   
     if(!queue.isEmpty()){
       currentNode = queue.dequeue();
-      GenericQueue.printNode(currentNode);
+      // GenericQueue.printNode(currentNode);
     }else{
       console.log("No se encontró solución");
       console.log("Último nodo");
@@ -46,7 +46,7 @@ function BFSAlgorithm(initialNode: Node, world: StateWorld){
   }
 
   if(currentNode !== null){
-    console.log("La solución es: ");
-    console.log(currentNode)
+    // console.log("La solución es: ");
+    console.log(currentNode.path)
   }
 }

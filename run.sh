@@ -1,17 +1,17 @@
 #!/bin/bash
 # chmod u+x ./run.sh
 
-if [ "$1" == "BFS" ];
+if [ "$2" == "BFS" ];
 then
-  node ./build/controllers/BFS.js $2
-elif [ "$1" == "DFS" ];
+  node ./build/controllers/BFS.js $1
+elif [ "$2" == "DFS" ];
 then
-  node ./build/controllers/DFS.js $2
-elif [ "$1" == "IDFS" ];
+  node ./build/controllers/DFS.js $1
+elif [ "$2" == "IDFS" ];
 then
-  node ./build/controllers/IterativeDeep.js $2
+  node ./build/controllers/IterativeDeep.js $1
 else
-  echo "$ ./run.sh <BFS | DFS | IDFS> <PATH>"
+  echo "$ ./run.sh <PATH> <BFS | DFS | IDFS>"
 fi
 
 

@@ -26,7 +26,7 @@ function BFSAlgorithm(initialNode, world) {
         }
         if (!queue.isEmpty()) {
             currentNode = queue.dequeue();
-            GenericQueue_1.default.printNode(currentNode);
+            // GenericQueue.printNode(currentNode);
         }
         else {
             console.log("No se encontró solución");
@@ -37,7 +37,7 @@ function BFSAlgorithm(initialNode, world) {
         }
     }
     if (currentNode !== null) {
-        console.log("La solución es: ");
-        console.log(currentNode);
+        // console.log("La solución es: ");
+        console.log(currentNode.path);
     }
 }

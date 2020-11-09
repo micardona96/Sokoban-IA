@@ -21,14 +21,21 @@ function BFSAlgorithm(initialNode, world) {
     var level = 0;
     queue.enqueueBack([initialNode]);
     var currentNode = queue.dequeue();
+    // let cost = 0
+    // let nivel = 0
     while (!controller_1.isSolved(currentNode, world.endPositionBoxes)) {
+        // if(currentNode.deep > nivel){
+        //   nivel++
+        //   console.log(cost)
+        // }
         if (currentNode.deep < 64) {
             controller_1.expandNode(currentNode, queue, world.map, mode, expandedNodes);
             expandedNodes.push(currentNode);
         }
         if (!queue.isEmpty()) {
+            // cost++
             currentNode = queue.dequeue();
-            GenericQueue_1.default.printNode(currentNode);
+            // GenericQueue.printNode(currentNode);
         }
         else {
             console.log("No se encontró solución");
@@ -39,7 +46,7 @@ function BFSAlgorithm(initialNode, world) {
         }
     }
     if (currentNode !== null) {
-        console.log("La solución es: ");
-        console.log(currentNode);
+        // console.log("La solución es: ");
+        console.log(currentNode.path);
     }
 }

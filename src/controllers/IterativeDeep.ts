@@ -25,7 +25,7 @@ function runDeepIteration(){
 
   queue.enqueueBack([initialNode]);
   let currentNode: Node = queue.dequeue();
-
+  let cost = 0
   while(!isSolved(currentNode, world.endPositionBoxes)){
     if(currentNode.deep <= level){
       expandNode(currentNode, queue, world.map, mode, expandedNodes);
@@ -33,12 +33,15 @@ function runDeepIteration(){
     }
 
     if(!queue.isEmpty()){
+      // cost++
       currentNode = queue.dequeue();
-      GenericQueue.printNode(currentNode);
+      // GenericQueue.printNode(currentNode);
     }else if(queue.isEmpty() && level < 64){
       queue.enqueueBack([initialNode]);
       expandedNodes = [];
       level++;
+      // console.log(cost)
+      // cost = 0
     }else{
       console.log("No se encontró solución");
       console.log("Último nodo");
@@ -50,7 +53,7 @@ function runDeepIteration(){
   }
 
   if(currentNode !== null){
-    console.log("La solución es: ");
-    console.log(currentNode)
+    // console.log("La solución es: ");
+    console.log(currentNode.path)
   }
 }

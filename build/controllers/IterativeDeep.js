@@ -19,19 +19,23 @@ function runDeepIteration() {
     var level = 0;
     queue.enqueueBack([initialNode]);
     var currentNode = queue.dequeue();
+    var cost = 0;
     while (!controller_1.isSolved(currentNode, world.endPositionBoxes)) {
         if (currentNode.deep <= level) {
             controller_1.expandNode(currentNode, queue, world.map, mode, expandedNodes);
             expandedNodes.push(currentNode);
         }
         if (!queue.isEmpty()) {
+            // cost++
             currentNode = queue.dequeue();
-            GenericQueue_1.default.printNode(currentNode);
+            // GenericQueue.printNode(currentNode);
         }
         else if (queue.isEmpty() && level < 64) {
             queue.enqueueBack([initialNode]);
             expandedNodes = [];
             level++;
+            // console.log(cost)
+            // cost = 0
         }
         else {
             console.log("No se encontró solución");
@@ -43,7 +47,7 @@ function runDeepIteration() {
         }
     }
     if (currentNode !== null) {
-        console.log("La solución es: ");
-        console.log(currentNode);
+        // console.log("La solución es: ");
+        console.log(currentNode.path);
     }
 }
