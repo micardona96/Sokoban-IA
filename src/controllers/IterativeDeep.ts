@@ -25,7 +25,7 @@ function runDeepIteration(){
 
   queue.enqueueBack([initialNode]);
   let currentNode: Node = queue.dequeue();
-  let cost = 0
+  //let cost = 0
   while(!isSolved(currentNode, world.endPositionBoxes)){
     if(currentNode.deep <= level){
       expandNode(currentNode, queue, world.map, mode, expandedNodes);
@@ -44,10 +44,7 @@ function runDeepIteration(){
       // cost = 0
     }else{
       console.log("No se encontró solución");
-      console.log("Último nodo");
-      console.log(currentNode);
       currentNode = null;
-      console.log(level)
       break;
     }
   }

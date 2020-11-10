@@ -38,8 +38,6 @@ function BFSAlgorithm(initialNode: Node, world: StateWorld){
       // GenericQueue.printNode(currentNode);
     }else{
       console.log("No se encontró solución");
-      console.log("Último nodo");
-      console.log(currentNode);
       currentNode = null;
       break;
     }

@@ -39,8 +39,6 @@ function BFSAlgorithm(initialNode, world) {
         }
         else {
             console.log("No se encontró solución");
-            console.log("Último nodo");
-            console.log(currentNode);
             currentNode = null;
             break;
         }
